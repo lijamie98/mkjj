@@ -1,11 +1,19 @@
-[workspace]
-resolver = "2"
-members = [
-  "contracts/*",
-]
+[package]
+name = "mkjj-token-contract"
+description = "MKJJ token contract"
+version = "0.0.6"
+edition = "2021"
+rust-version = "1.80.0"
 
-[workspace.dependencies]
-soroban-sdk = "22.0.0"
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = { version = "22.0.7" }
+soroban-token-sdk = { version = "22.0.1" }
+
+[dev-dependencies]
+soroban-sdk = { version = "22.0.7", features = ["testutils"] }
 
 [profile.release]
 opt-level = "z"
@@ -17,7 +25,6 @@ panic = "abort"
 codegen-units = 1
 lto = true
 
-# For more information about this profile see https://soroban.stellar.org/docs/basic-tutorials/logging#cargotoml-profile
 [profile.release-with-logs]
 inherits = "release"
 debug-assertions = true
